@@ -21,9 +21,7 @@ C:\aspnet\src\AppStore\obj\Debug\net8.0\staticwebassets\msbuild.build.AppStore.p
 C:\aspnet\src\AppStore\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.AppStore.props
 C:\aspnet\src\AppStore\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.AppStore.props
 C:\aspnet\src\AppStore\obj\Debug\net8.0\staticwebassets.pack.json
-C:\aspnet\src\AppStore\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\aspnet\src\AppStore\obj\Debug\net8.0\scopedcss\bundle\AppStore.styles.css
-C:\aspnet\src\AppStore\obj\Debug\net8.0\scopedcss\projectbundle\AppStore.bundle.scp.css
 C:\aspnet\src\AppStore\obj\Debug\net8.0\AppStore.dll
 C:\aspnet\src\AppStore\obj\Debug\net8.0\refint\AppStore.dll
 C:\aspnet\src\AppStore\obj\Debug\net8.0\AppStore.pdb
