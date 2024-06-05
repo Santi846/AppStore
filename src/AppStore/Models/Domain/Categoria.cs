@@ -11,4 +11,8 @@ public class Categoria {
 
     public String? Nombre { get; set; }
 
+    public virtual ICollection<Libro>? LibroRelationList {get;set;}
+
+    public virtual ICollection<LibroCategoria>? LibroCategoriaRelationList {get;set;}
+
 }

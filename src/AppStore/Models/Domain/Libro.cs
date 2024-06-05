@@ -29,4 +29,7 @@ namespace AppStore.Models.Domain;
         [Required] //set the Author required
         public string? Autor {get;set;}
 
+        public virtual ICollection<Categoria>? CategoriaRelationList {get;set;}
+
+        public virtual ICollection<LibroCategoria>? LibroCategoriaRelationList {get;set;}
     }
