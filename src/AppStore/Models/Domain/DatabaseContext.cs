@@ -1,3 +1,4 @@
+using System.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -5,6 +6,28 @@ using Microsoft.EntityFrameworkCore;
 namespace AppStore.Models.Domain;
 
 public class DatabaseContext : IdentityDbContext<ApplicationUser>{
+
+    // Database context definition, environment variables
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options){}
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        // Many to many relation
+
+        builder.Entity<Libro>()
+        .HasMany(x=> x.CategoriaRelationList)
+        .WithMany(y=>y.LibroRelationList)
+        .UsingEntity<LibroCategoria>(
+            j => j.HasOne(p => p.Categoria).WithMany(p => p.LibroCategoriaRelationList).HasForeignKey(p=>p.CategoriaId),
+            j=> j.HasOne(p=> p.Libro).WithMany(p=> p.LibroCategoriaRelationList).HasForeignKey(p=> p.LibroId),
+            j=> {
+                j.HasKey(t=> new {t.LibroId, t.CategoriaId});
+                }
+        );
+
+    }
 
     public DbSet<Categoria>? Categorias {get;set;}
 
