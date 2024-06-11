@@ -1,9 +1,23 @@
+using Microsoft.Extensions.Options;
+using AppStore.Models.Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 // builder.Services.AddDbContext<DatabaseContext>(options => options.LogTo(Console.WriteLine, new []){}.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder. Services.AddDbContext<DatabaseContext> (opt => {
+    opt.LogTo(Console.WriteLine, new [] {
+        DbLoggerCategory.Database.Command.Name},
+        LogLevel.Information).EnableSensitiveDataLogging();
+
+    opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteDatabase"));
+
+});
 
 var app = builder.Build();
 
