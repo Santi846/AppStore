@@ -13,9 +13,10 @@ builder.Services.AddControllersWithViews();
 builder. Services.AddDbContext<DatabaseContext> (opt => {
     opt.LogTo(Console.WriteLine, new [] {
         DbLoggerCategory.Database.Command.Name},
-        LogLevel.Information).EnableSensitiveDataLogging();
+        LogLevel.Information) .EnableSensitiveDataLogging().UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
-    opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteDatabase"));
+    // opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteDatabase"));
+    // .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
 
 });
 
