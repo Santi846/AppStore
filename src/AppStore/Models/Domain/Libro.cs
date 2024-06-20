@@ -16,7 +16,8 @@ namespace AppStore.Models.Domain;
 
         // public string? Descripcion {get;set;}
 
-        public System.DateTime CreateDate {get;set;}
+        public string? CreateDate {get;set;}
+        // public System.DateTime CreateDate {get;set;}
 
         // public Precio? PrecioPromocion {get;set;}
 
