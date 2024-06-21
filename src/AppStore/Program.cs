@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using AppStore.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,10 @@ builder. Services.AddDbContext<DatabaseContext> (opt => {
 
 });
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<DatabaseContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,10 +40,36 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+
+using (var environment = app.Services.CreateScope()){
+
+    var services = environment.ServiceProvider;
+
+    try
+    {
+
+        var context = services.GetRequiredService<DatabaseContext>();
+
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        await LoadDatabase.InsertData(context, userManager, roleManager);
+    }
+    catch (Exception e)
+    {
+        var logging = services.GetRequiredService<ILogger<Program>>();
+        logging.LogError(e, "Has occurred an error on database data insertion!");
+        throw;
+    }
+    
+}
 
 app.Run();
