@@ -1,0 +1,4 @@
+-EF Core
+-EF core tools
+-dotnet EF tool migration = version de SDK de proyecto
+-port: 1433 

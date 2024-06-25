@@ -28,37 +28,41 @@ public class LoadDatabase{
 
         if (!context.Categorias!.Any())
         {
-            context.Categorias!.AddRange(
+            await context.Categorias!.AddRangeAsync(
                 new Categoria {Nombre = "Drama"},
                 new Categoria {Nombre = "Comedia"},
                 new Categoria {Nombre = "Accion"},
                 new Categoria {Nombre = "Terror"},
                 new Categoria {Nombre = "Aventura"}
             );
+
+            await context.SaveChangesAsync();
         }
 
         if (!context.Libros!.Any())
         {
-            context.Libros!.AddRange( 
+            await context.Libros!.AddRangeAsync( 
                 new Libro {
                     Titulo = "Primer libro creado",
-                    CreateDate = "20/06/2024",
+                    CreateDate = DateTime.ParseExact("20/06/2024", "dd/MM/yyyy", null),
                     Imagen = "libro1.png",
                     Autor = "Santiago Arocha"
                 },
 
                 new Libro {
                     Titulo = "Segundo libro creado",
-                    CreateDate = "20/06/2024",
+                    CreateDate = DateTime.ParseExact("20/06/2024", "dd/MM/yyyy", null),
                     Imagen = "libro2.png",
                     Autor = "Santiago Arocha"
                 }
             );
+
+            await context.SaveChangesAsync();
         }
 
         if (!context.LibroCategorias!.Any())
         {
-            context.LibroCategorias!.AddRange( 
+            await context.LibroCategorias!.AddRangeAsync( 
                 new LibroCategoria {
                     CategoriaId = 1,
                     LibroId = 1
@@ -69,6 +73,8 @@ public class LoadDatabase{
                     LibroId = 2
                 }
             );
+
+            await context.SaveChangesAsync();
         }
 
         context.SaveChanges();
